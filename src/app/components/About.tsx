@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import aboutImg from "/img/about.jpg";
 
 export function About() {
   return (
@@ -66,7 +65,7 @@ export function About() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-400" />
             <ImageWithFallback
-              src={aboutImg}
+              src="/img/about.jpg"
               alt="Studio setup"
               className="relative z-10 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
             />
