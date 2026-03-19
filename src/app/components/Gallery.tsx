@@ -1,68 +1,68 @@
-import { motion } from 'motion/react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { useState } from 'react';
+import { motion } from "motion/react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useState } from "react";
 
 const galleryImages = [
   {
     id: 1,
-    src: '/img/galery/1.jpg',
-    alt: 'Gallery 1'
+    src: "/img/galery/7.jpg",
+    alt: "Gallery 1",
   },
   {
     id: 2,
-    src: '/img/galery/2.jpg',
-    alt: 'Gallery 2'
+    src: "/img/galery/8.jpg",
+    alt: "Gallery 2",
   },
   {
     id: 3,
-    src: '/img/galery/3.jpg',
-    alt: 'Gallery 3'
+    src: "/img/galery/9.jpg",
+    alt: "Gallery 3",
   },
   {
     id: 4,
-    src: '/img/galery/4.jpg',
-    alt: 'Gallery 4'
+    src: "/img/galery/10.jpg",
+    alt: "Gallery 4",
   },
   {
     id: 5,
-    src: '/img/galery/5.jpg',
-    alt: 'Gallery 5'
+    src: "/img/galery/1.jpg",
+    alt: "Gallery 5",
   },
   {
     id: 6,
-    src: '/img/galery/6.jpg',
-    alt: 'Gallery 6'
+    src: "/img/galery/2.jpg",
+    alt: "Gallery 6",
   },
   {
     id: 7,
-    src: '/img/galery/7.jpg',
-    alt: 'Gallery 7'
+    src: "/img/galery/3.jpg",
+    alt: "Gallery 7",
   },
   {
     id: 8,
-    src: '/img/galery/8.jpg',
-    alt: 'Gallery 8'
+    src: "/img/galery/4.jpg",
+    alt: "Gallery 8",
   },
   {
     id: 9,
-    src: '/img/galery/9.jpg',
-    alt: 'Gallery 9'
+    src: "/img/galery/5.jpg",
+    alt: "Gallery 9",
   },
   {
     id: 10,
-    src: '/img/galery/10.jpg',
-    alt: 'Gallery 10'
+    src: "/img/galery/6.jpg",
+    alt: "Gallery 10",
   },
   {
     id: 11,
-    src: '/img/galery/11.jpg',
-    alt: 'Gallery 11'
+    src: "/img/galery/11.jpg",
+    alt: "Gallery 11",
   },
   {
     id: 12,
-    src: '/img/galery/12.jpg',
-    alt: 'Gallery 12'
-  }
+    src: "/img/galery/12.jpg",
+    alt: "Gallery 12",
+  },
 ];
 
 export function Gallery() {
@@ -98,9 +98,9 @@ export function Gallery() {
                 src={image.src}
                 alt={image.alt}
                 className={`w-full h-full object-cover transition-all duration-700 ${
-                  hoveredId === image.id 
-                    ? 'grayscale-0 scale-110' 
-                    : 'grayscale hover:grayscale-0'
+                  hoveredId === image.id
+                    ? "grayscale-0 scale-110"
+                    : "grayscale hover:grayscale-0"
                 }`}
               />
               <motion.div

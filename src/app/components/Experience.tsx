@@ -8,7 +8,6 @@ const experiences = [
     description: "Tổ hợp sản xuất âm nhạc, thu âm, hoà âm phối khí tại Hà Nội.",
     achievements: [
       "Cung cấp các dịch vụ thu âm, sản xuất âm nhạc",
-      "Giá cả cạnh tranh, hướng đến đối tượng trẻ, âm nhạc tươi mới",
       "Sản xuất các sản phẩm TVC, lồng tiếng, nhạc phim cho các dự án lớn nhỏ",
     ],
   },
@@ -18,10 +17,7 @@ const experiences = [
     company: "90DEGREE MUSIC LAB",
     description:
       "Làm việc với đội ngũ âm thanh chất lượng, tạo ra sản phẩm âm nhạc chất lượng cao",
-    achievements: [
-      "Giao lưu, học hỏi với các producer nổi tiếng",
-      "Tham gia trực tiếp vào quá trình sản xuất âm nhạc",
-    ],
+    achievements: ["Tham gia trực tiếp vào quá trình sản xuất âm nhạc"],
   },
   {
     year: "2023 - 2024",
@@ -45,8 +41,6 @@ const experiences = [
     achievements: [
       "Tổ chức thành công các sự kiện âm nhạc quy mô lớn, thu hút hàng trăm sinh viên tham gia",
       "Xây dựng và phát triển các chương trình đào tạo kỹ năng âm nhạc, thu hút sự quan tâm của đông đảo sinh viên",
-      "Trưởng BTC các sự kiện âm nhạc quy mô lớn có sự tham gia của nghệ sĩ khách mời chuyên nghiệp",
-      "Đại diện CLB làm việc với các đơn vị đối tác, nhà tài trợ",
       "Quản lý đội ngũ nội dung, truyền thông, âm thanh – ánh sáng và hậu cần sự kiện",
     ],
   },
