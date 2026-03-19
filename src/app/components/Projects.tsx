@@ -113,8 +113,8 @@ export function Projects() {
               </div>
 
               {/* Text Info */}
-              <div className="flex-1 min-w-0 px-4 md:px-0 flex flex-col justify-center">
-                <h3 className="text-sm sm:text-base md:text-xl tracking-tight mb-0.5 md:mb-1 flex items-center gap-2 truncate">
+              <div className="flex-1 min-w-0 px-4 md:px-0 flex flex-col justify-center w-full">
+                <h3 className="text-sm sm:text-base md:text-xl tracking-tight mb-0.5 md:mb-1 flex items-center gap-2 w-full">
                   {currentTrack?.id === project.id && (
                     <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
                   )}
@@ -123,9 +123,9 @@ export function Projects() {
                   </span>
                 </h3>
                 
-                <div className="flex flex-col md:flex-row md:justify-between text-xs md:text-sm text-gray-400 gap-1 md:gap-0">
-                  <span className="hidden md:block tracking-wider">{project.category}</span>
-                  <span className="truncate">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center text-xs md:text-sm text-gray-400 gap-1 md:gap-2 w-full mt-1">
+                  <span className="hidden md:block tracking-wider shrink-0">{project.category}</span>
+                  <span className="truncate md:text-right flex-1">
                     {project.artist} <span className="hidden md:inline">• {project.year}</span>
                   </span>
                 </div>
