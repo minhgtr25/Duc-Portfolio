@@ -1,6 +1,7 @@
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
+import { Demos } from './components/Demos';
 import { Services } from './components/Services';
 import { Experience } from './components/Experience';
 import { Gallery } from './components/Gallery';
@@ -19,6 +20,7 @@ export default function App() {
           <Hero />
         <About />
         <Projects />
+        <Demos />
         <Services />
         <Experience />
         <Gallery />

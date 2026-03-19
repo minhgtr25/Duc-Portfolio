@@ -16,6 +16,12 @@ const YoutubeIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
+
 const projects = [
   {
     id: 1,
@@ -25,8 +31,9 @@ const projects = [
     year: "2026",
     image: "/img/omem.jpg",
     audioSrc: "/audio/Ôm Em Khóc Thật To.mp3",
-    spotifyUrl: "https://open.spotify.com",
-    youtubeUrl: "https://youtube.com"
+    spotifyUrl: "https://open.spotify.com/track/5fvT9fn2GGn9q5KAaFo6Rc",
+    youtubeUrl:
+      "https://www.youtube.com/watch?v=ctFQZ1FDgck&list=RDctFQZ1FDgck&start_radio=1&pp=ygUWw7RtIGVtIGtow7NjIHRo4bqtdCB0b6AHAQ%3D%3D",
   },
   {
     id: 2,
@@ -36,8 +43,9 @@ const projects = [
     year: "2025",
     image: "/img/vidongbao.jpg",
     audioSrc: "/audio/Vì đồng bào, cùng chung tay.mp3",
-    spotifyUrl: "https://open.spotify.com",
-    youtubeUrl: "https://youtube.com"
+    spotifyUrl: "https://open.spotify.com/track/6wlA6c1zEwRnE3ejjNTB8T",
+    youtubeUrl:
+      "https://www.youtube.com/watch?v=ioUTsS8mBl0&list=RDioUTsS8mBl0&start_radio=1&pp=ygUgdsOsIMSR4buTbmcgYsOgbyBjw7luZyBjaHVuZyB0YXmgBwE%3D",
   },
   {
     id: 3,
@@ -47,8 +55,42 @@ const projects = [
     year: "2025",
     image: "/img/soica.jpg",
     audioSrc: "/audio/Sói ca.mp3",
-    spotifyUrl: "https://open.spotify.com",
-    youtubeUrl: "https://youtube.com"
+    youtubeUrl:
+      "https://www.youtube.com/watch?v=M_u27ppUKyM&list=RDM_u27ppUKyM&start_radio=1&pp=ygUPc8OzaSBjYSBicmF3bGVyoAcB",
+  },
+  {
+    id: 4,
+    title: "BLACK MIRROR",
+    artist: "Cyris, Curlz, KT",
+    category: "SINGLE",
+    year: "2025",
+    image: "/img/blackmirror.png",
+    audioSrc: "/audio/Black Mirror.mp3",
+    facebookUrl: "https://www.facebook.com/reel/1109246727256893",
+    youtubeUrl: "",
+  },
+  {
+    id: 5,
+    title: "Lời Mật Ngọt (Version 2.0)",
+    artist: "Châu Nhi (Janie)",
+    category: 'EP "FALLING ANGEL"',
+    year: "2024",
+    image: "/img/loimatngot.jpg",
+    audioSrc: "/audio/Lời Mật Ngọt.mp3",
+    spotifyUrl:
+      "https://open.spotify.com/track/4GrKze4WF3GkCpXzwQPlgt?si=58cf38044fca4cc9&nd=1&dlsi=cf4b572873aa44c2",
+    youtubeUrl: "https://youtu.be/ShshtjcIv-o?si=RgmwLYQt8VkuzaCa",
+  },
+  {
+    id: 6,
+    title: "Tại Sao Như Này",
+    artist: "YOONA KIM",
+    category: 'EP "CẢM NHẬN"',
+    year: "2025",
+    image: "/img/taisaonhunay.jpg",
+    audioSrc: "/audio/Tại Sao Như Này.mp3",
+    spotifyUrl: "https://open.spotify.com/track/1FTusNRky7oO17Ca4Sv5Ez",
+    youtubeUrl: "https://youtu.be/rErjIeXC27M?si=AgDAGeWcGwp20-3e",
   },
 ];
 
@@ -56,7 +98,7 @@ export function Projects() {
   const { currentTrack, isPlaying, playTrack, togglePlay } = usePlayer();
 
   return (
-    <section className="min-h-screen bg-black text-white py-20 pb-40">
+    <section className="bg-black text-white pt-20 pb-10">
       <div className="container mx-auto px-4 md:px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
@@ -79,7 +121,11 @@ export function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ y: -5, scale: 1.01 }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
               viewport={{ once: true, margin: "-20px" }}
               className="group cursor-pointer flex flex-row md:flex-col items-center md:items-start bg-zinc-900/40 hover:bg-zinc-800/80 md:bg-transparent md:hover:bg-transparent p-3 md:p-0 rounded-xl md:rounded-none transition-colors"
               onClick={() => {
@@ -97,7 +143,7 @@ export function Projects() {
                   alt={project.title}
                   className={`w-full h-full object-cover transition-all duration-500 ${currentTrack?.id === project.id ? "grayscale-0" : "grayscale md:group-hover:grayscale-0 md:group-hover:scale-105"}`}
                 />
-                
+
                 {/* Play button overlay: Luôn hiện nếu đang play, trên mobile ẩn đi để list, desktop hiển thị to khi hover */}
                 <div
                   className={`absolute inset-0 bg-black/60 items-center justify-center transition-opacity duration-300 ${currentTrack?.id === project.id ? "flex opacity-100" : "hidden md:flex opacity-0 group-hover:opacity-100"}`}
@@ -118,15 +164,20 @@ export function Projects() {
                   {currentTrack?.id === project.id && (
                     <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-pulse shrink-0" />
                   )}
-                  <span className={`truncate ${currentTrack?.id === project.id ? 'text-green-400' : 'text-white group-hover:text-green-400 md:group-hover:text-white transition-colors'}`}>
+                  <span
+                    className={`truncate ${currentTrack?.id === project.id ? "text-green-400" : "text-white group-hover:text-green-400 md:group-hover:text-white transition-colors"}`}
+                  >
                     {project.title}
                   </span>
                 </h3>
-                
+
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center text-xs md:text-sm text-gray-400 gap-1 md:gap-2 w-full mt-1">
-                  <span className="hidden md:block tracking-wider shrink-0">{project.category}</span>
+                  <span className="hidden md:block tracking-wider shrink-0">
+                    {project.category}
+                  </span>
                   <span className="truncate md:text-right flex-1">
-                    {project.artist} <span className="hidden md:inline">• {project.year}</span>
+                    {project.artist}{" "}
+                    <span className="hidden md:inline">• {project.year}</span>
                   </span>
                 </div>
               </div>
@@ -134,10 +185,10 @@ export function Projects() {
               {/* External Links (Spotify, Youtube) */}
               <div className="flex items-center gap-2 md:gap-3 md:mt-4 md:w-full md:justify-start">
                 {project.spotifyUrl && (
-                  <a 
-                    href={project.spotifyUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={project.spotifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="text-gray-400 hover:text-[#1DB954] transition-colors p-2 md:p-0"
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -145,18 +196,28 @@ export function Projects() {
                   </a>
                 )}
                 {project.youtubeUrl && (
-                  <a 
-                    href={project.youtubeUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={project.youtubeUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="text-gray-400 hover:text-[#FF0000] transition-colors p-2 md:p-0"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <YoutubeIcon className="w-5 h-5 md:w-6 md:h-6" />
                   </a>
                 )}
+                {(project as any).facebookUrl && (
+                  <a
+                    href={(project as any).facebookUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-400 hover:text-[#1877F2] transition-colors p-2 md:p-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <FacebookIcon className="w-5 h-5 md:w-6 md:h-6" />
+                  </a>
+                )}
               </div>
-
             </motion.div>
           ))}
         </div>
