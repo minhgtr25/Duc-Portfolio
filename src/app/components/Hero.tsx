@@ -17,8 +17,35 @@ export function Hero() {
 
   return (
     <section ref={ref} className="min-h-screen flex items-center justify-center relative bg-black text-white overflow-hidden">
-      {/* Background layer - can add grain or subtle patterns here later */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900/20 to-black z-0" />
+      {/* Background layer - Aurora / Glowing Orbs */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <motion.div
+          animate={{ 
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-zinc-800/20 blur-[120px] mix-blend-screen"
+        />
+        <motion.div
+          animate={{ 
+            scale: [1, 1.3, 1],
+            x: [0, -40, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[30%] -right-[10%] w-[40vw] h-[40vw] rounded-full bg-zinc-900/40 blur-[100px] mix-blend-screen"
+        />
+        <motion.div
+          animate={{ 
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[40vw] rounded-full bg-green-900/10 blur-[120px] mix-blend-screen"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black z-0 pointer-events-none" />
 
       <motion.div 
         style={{ y: yBg, opacity }} 
