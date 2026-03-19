@@ -1,0 +1,26 @@
+import { Hero } from './components/Hero';
+import { About } from './components/About';
+import { Projects } from './components/Projects';
+import { Services } from './components/Services';
+import { Experience } from './components/Experience';
+import { Gallery } from './components/Gallery';
+import { Contact } from './components/Contact';
+import { PlayerProvider } from './context/PlayerContext';
+import { MusicPlayer } from './components/MusicPlayer';
+
+export default function App() {
+  return (
+    <PlayerProvider>
+      <div className="size-full pb-24">
+        <Hero />
+        <About />
+        <Projects />
+        <Services />
+        <Experience />
+        <Gallery />
+        <Contact />
+      </div>
+      <MusicPlayer />
+    </PlayerProvider>
+  );
+}
