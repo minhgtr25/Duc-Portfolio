@@ -7,12 +7,16 @@ import { Gallery } from './components/Gallery';
 import { Contact } from './components/Contact';
 import { PlayerProvider } from './context/PlayerContext';
 import { MusicPlayer } from './components/MusicPlayer';
+import { SmoothScroll } from './components/SmoothScroll';
+import { CustomCursor } from './components/CustomCursor';
 
 export default function App() {
   return (
     <PlayerProvider>
-      <div className="size-full pb-24">
-        <Hero />
+      <SmoothScroll>
+        <CustomCursor />
+        <div className="size-full pb-24">
+          <Hero />
         <About />
         <Projects />
         <Services />
@@ -21,6 +25,7 @@ export default function App() {
         <Contact />
       </div>
       <MusicPlayer />
+      </SmoothScroll>
     </PlayerProvider>
   );
 }
