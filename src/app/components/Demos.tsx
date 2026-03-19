@@ -23,7 +23,7 @@ const demos: DemoProject[] = [
       "https://drive.google.com/file/d/1NzszOEUFKVSYopq4TdXX5E4lch3lbvA6/view", // Thêm link video/demo thật vào đây
     audioSrc: "/audio/ballad 1 demo.mp3", // Link audio nháp
     info: [
-      { label: "Dự kiến", value: "Đã ra mắt" },
+      { label: "Dự kiến", value: "2026" },
       { label: "Vai trò", value: "Music Arranger, Beat Maker" },
       { label: "Thể loại", value: "K-Ballad" },
       {
