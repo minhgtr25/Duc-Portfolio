@@ -64,7 +64,7 @@ const projects = [
     artist: "Cyris, Curlz, KT",
     category: "SINGLE",
     year: "2025",
-    image: "/img/blackmirror.png",
+    image: "/img/blackmirror.jpg",
     audioSrc: "/audio/Black Mirror.mp3",
     facebookUrl: "https://www.facebook.com/reel/1109246727256893",
     youtubeUrl: "",
