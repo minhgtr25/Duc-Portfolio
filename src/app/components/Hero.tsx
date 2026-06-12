@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
+import { useData } from "../context/DataContext";
 
 export function Hero() {
   const ref = useRef(null);
+  const { data } = useData();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -13,7 +15,8 @@ export function Hero() {
   const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const text = "DUCLUU.";
+  const text = data.hero.text;
+  const subtitle = data.hero.subtitle;
 
   return (
     <section ref={ref} className="min-h-screen flex items-center justify-center relative bg-black text-white overflow-hidden">
@@ -82,7 +85,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 1 }}
           className="text-xl md:text-2xl tracking-widest text-gray-400"
         >
-          MUSIC ARRANGER & GUITARIST
+          {subtitle}
         </motion.p>
       </motion.div>
 

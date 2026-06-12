@@ -1,52 +1,10 @@
 import { motion } from "motion/react";
-
-const experiences = [
-  {
-    year: "2025 - NAY",
-    role: "FOUNDER - CO-LEADER",
-    company: "410 Studio",
-    description: "Tổ hợp sản xuất âm nhạc, thu âm, hoà âm phối khí tại Hà Nội.",
-    achievements: [
-      "Cung cấp các dịch vụ thu âm, sản xuất âm nhạc",
-      "Sản xuất các sản phẩm TVC, lồng tiếng, nhạc phim cho các dự án lớn nhỏ",
-    ],
-  },
-  {
-    year: "2025 - NAY",
-    role: "MUSIC PRODUCER",
-    company: "90DEGREE MUSIC LAB",
-    description:
-      "Làm việc với đội ngũ âm thanh chất lượng, tạo ra sản phẩm âm nhạc chất lượng cao",
-    achievements: ["Tham gia trực tiếp vào quá trình sản xuất âm nhạc"],
-  },
-  {
-    year: "2023 - 2024",
-    role: "MEDIA OFFICER",
-    company: "TRUNG TÂM NGHỆ THUẬT MUSIC TALENT",
-    description:
-      "Quản lý và phát triển các nền tảng truyền thông số cho một dự án/đơn vị sáng tạo.",
-    achievements: [
-      "Quản lý nội dung trên Website, Facebook, YouTube",
-      "Lên kịch bản, hỗ trợ quay và dựng video",
-      "Theo dõi tương tác, hỗ trợ định hướng nội dung theo từng chiến dịch",
-      "Tối ưu hóa nội dung để tăng độ phủ và giữ chân người xem",
-    ],
-  },
-  {
-    year: "2022 - 2023",
-    role: "PRESIDENT",
-    company: "FPTU - MELODY CLUB",
-    description:
-      "Giữ vai trò Chủ nhiệm CLB, điều hành hoạt động của hơn 200 thành viên.",
-    achievements: [
-      "Tổ chức thành công các sự kiện âm nhạc quy mô lớn, thu hút hàng trăm sinh viên tham gia",
-      "Xây dựng và phát triển các chương trình đào tạo kỹ năng âm nhạc, thu hút sự quan tâm của đông đảo sinh viên",
-      "Quản lý đội ngũ nội dung, truyền thông, âm thanh – ánh sáng và hậu cần sự kiện",
-    ],
-  },
-];
+import { useData } from "../context/DataContext";
 
 export function Experience() {
+  const { data } = useData();
+  const experiences = data.experiences;
+
   return (
     <section className="min-h-screen bg-black text-white py-20">
       <div className="container mx-auto px-6 max-w-6xl">

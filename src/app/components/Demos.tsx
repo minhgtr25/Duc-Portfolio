@@ -1,57 +1,13 @@
 import { motion } from "motion/react";
 import { Play, Pause, ExternalLink } from "lucide-react";
 import { usePlayer } from "../context/PlayerContext";
-
-type DemoInfo = {
-  label: string;
-  value: string;
-};
-
-type DemoProject = {
-  id: number;
-  title: string;
-  info: DemoInfo[];
-  linkDemo: string;
-  audioSrc: string;
-};
-
-const demos: DemoProject[] = [
-  {
-    id: 101,
-    title: 'OST "Dream From My Father ft. Đinh Viết Tường"',
-    linkDemo:
-      "https://drive.google.com/file/d/1NzszOEUFKVSYopq4TdXX5E4lch3lbvA6/view", // Thêm link video/demo thật vào đây
-    audioSrc: "/audio/ballad 1 demo.mp3", // Link audio nháp
-    info: [
-      { label: "Dự kiến", value: "2026" },
-      { label: "Vai trò", value: "Music Arranger, Beat Maker" },
-      { label: "Thể loại", value: "K-Ballad" },
-      {
-        label: "Phong cách",
-        value: "Tối giản, âm thanh mộc, cổ điển (piano, string, guitar)",
-      },
-    ],
-  },
-  {
-    id: 102,
-    title: 'OST "Kỳ nghỉ của bố"',
-    linkDemo:
-      "https://drive.google.com/drive/folders/1EXtTBmMYKHjKic3pmno06Q1zcl9My0n5",
-    audioSrc: "/audio/Demo bài 1.mp3",
-    info: [
-      { label: "Dự kiến", value: "2026" },
-      { label: "Vai trò", value: "Music Arranger, Beat Maker" },
-      { label: "Thể loại", value: "Pop Ballad, Pop" },
-      {
-        label: "Nội dung",
-        value: "Hai màu sắc đối lập: mộc mạc cổ điển và vui tươi trẻ trung.",
-      },
-    ],
-  },
-];
+import { useData } from "../context/DataContext";
 
 export function Demos() {
   const { currentTrack, isPlaying, playTrack, togglePlay } = usePlayer();
+  const { data } = useData();
+  const demos = data.demos;
+
 
   return (
     <section className="bg-black text-white pb-20 md:pb-32">

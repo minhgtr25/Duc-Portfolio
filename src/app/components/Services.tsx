@@ -1,30 +1,18 @@
 import { motion } from 'motion/react';
 import { Music, AudioWaveform, Mic, Headphones } from 'lucide-react';
+import { useData } from '../context/DataContext';
 
-const services = [
-  {
-    icon: Music,
-    title: 'PRODUCTION',
-    description: 'Trực tiếp lên ý tưởng, hoà âm phối khí và định hình màu sắc âm nhạc mang dấu ấn riêng cho dự án của bạn.'
-  },
-  {
-    icon: AudioWaveform,
-    title: 'MIXING',
-    description: 'Trau chuốt, cân bằng các dải âm và sắc thái tự nhiên nhất, giúp truyền tải đúng cảm xúc mà bài hát muốn gửi gắm.'
-  },
-  {
-    icon: Mic,
-    title: 'RECORDING',
-    description: 'Hỗ trợ thu âm vocal và nhạc cụ. Tôi luôn cố gắng tạo một không gian thoải mái nhất để nghệ sĩ được tự do thể hiện.'
-  },
-  {
-    icon: Headphones,
-    title: 'MASTERING',
-    description: 'Hoàn thiện bản audio cuối cùng, đảm bảo bài hát nghe mượt mà và đạt âm lượng chuẩn trên mọi nền tảng phát hành.'
-  }
-];
+const iconMap: Record<string, any> = {
+  Music,
+  AudioWaveform,
+  Mic,
+  Headphones
+};
 
 export function Services() {
+  const { data } = useData();
+  const services = data.services;
+
   return (
     <section className="min-h-screen bg-white text-black py-20">
       <div className="container mx-auto px-6 max-w-6xl">
@@ -53,7 +41,10 @@ export function Services() {
               
               <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
                 <div className="mb-8 inline-block p-4 bg-gray-50 rounded-2xl group-hover:bg-white/10 group-hover:text-white transition-colors duration-500 self-start">
-                  <service.icon className="w-8 h-8" />
+                  {iconMap[service.icon] && (() => {
+                    const Icon = iconMap[service.icon];
+                    return <Icon className="w-8 h-8" />;
+                  })()}
                 </div>
                 
                 <div className="mt-auto">

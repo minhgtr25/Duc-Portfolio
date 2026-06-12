@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Play, Pause } from "lucide-react";
 import { usePlayer } from "../context/PlayerContext";
+import { useData } from "../context/DataContext";
 
 // Define inline SVGs for Spotify and Youtube
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -22,80 +23,11 @@ const FacebookIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const projects = [
-  {
-    id: 1,
-    title: "Ôm Em Khóc Thật To",
-    artist: "DAQUIN",
-    category: "SINGLE",
-    year: "2026",
-    image: "/img/omem.jpg",
-    audioSrc: "/audio/Ôm Em Khóc Thật To.mp3",
-    spotifyUrl: "https://open.spotify.com/track/5fvT9fn2GGn9q5KAaFo6Rc",
-    youtubeUrl:
-      "https://www.youtube.com/watch?v=ctFQZ1FDgck&list=RDctFQZ1FDgck&start_radio=1&pp=ygUWw7RtIGVtIGtow7NjIHRo4bqtdCB0b6AHAQ%3D%3D",
-  },
-  {
-    id: 2,
-    title: "Vì Đồng Bào, Cùng Chung Tay",
-    artist: "Shay N",
-    category: "SINGLE",
-    year: "2025",
-    image: "/img/vidongbao.jpg",
-    audioSrc: "/audio/Vì đồng bào, cùng chung tay.mp3",
-    spotifyUrl: "https://open.spotify.com/track/6wlA6c1zEwRnE3ejjNTB8T",
-    youtubeUrl:
-      "https://www.youtube.com/watch?v=ioUTsS8mBl0&list=RDioUTsS8mBl0&start_radio=1&pp=ygUgdsOsIMSR4buTbmcgYsOgbyBjw7luZyBjaHVuZyB0YXmgBwE%3D",
-  },
-  {
-    id: 3,
-    title: "SÓI CA",
-    artist: "Brawler, Curlz",
-    category: "SINGLE",
-    year: "2025",
-    image: "/img/soica.jpg",
-    audioSrc: "/audio/Sói ca.mp3",
-    youtubeUrl:
-      "https://www.youtube.com/watch?v=M_u27ppUKyM&list=RDM_u27ppUKyM&start_radio=1&pp=ygUPc8OzaSBjYSBicmF3bGVyoAcB",
-  },
-  {
-    id: 4,
-    title: "BLACK MIRROR",
-    artist: "Cyris, Curlz, KT",
-    category: "SINGLE",
-    year: "2025",
-    image: "/img/blackmirror.jpg",
-    audioSrc: "/audio/Black Mirror.mp3",
-    facebookUrl: "https://www.facebook.com/reel/1109246727256893",
-    youtubeUrl: "",
-  },
-  {
-    id: 5,
-    title: "Lời Mật Ngọt (Version 2.0)",
-    artist: "Châu Nhi (Janie)",
-    category: 'EP "FALLING ANGEL"',
-    year: "2024",
-    image: "/img/loimatngot.jpg",
-    audioSrc: "/audio/Lời Mật Ngọt.mp3",
-    spotifyUrl:
-      "https://open.spotify.com/track/4GrKze4WF3GkCpXzwQPlgt?si=58cf38044fca4cc9&nd=1&dlsi=cf4b572873aa44c2",
-    youtubeUrl: "https://youtu.be/ShshtjcIv-o?si=RgmwLYQt8VkuzaCa",
-  },
-  {
-    id: 6,
-    title: "Tại Sao Như Này",
-    artist: "YOONA KIM",
-    category: 'EP "CẢM NHẬN"',
-    year: "2025",
-    image: "/img/taisaonhunay.jpg",
-    audioSrc: "/audio/Tại Sao Như Này.mp3",
-    spotifyUrl: "https://open.spotify.com/track/1FTusNRky7oO17Ca4Sv5Ez",
-    youtubeUrl: "https://youtu.be/rErjIeXC27M?si=AgDAGeWcGwp20-3e",
-  },
-];
-
 export function Projects() {
   const { currentTrack, isPlaying, playTrack, togglePlay } = usePlayer();
+  const { data } = useData();
+  const projects = data.projects;
+
 
   return (
     <section className="bg-black text-white pt-20 pb-10">
