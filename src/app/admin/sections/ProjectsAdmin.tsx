@@ -60,7 +60,7 @@ export function ProjectsAdmin({ data, onChange }: { data: any[], onChange: (newD
             </button>
             <h3 className="font-semibold text-zinc-300 pr-10">Dự án: {project.title}</h3>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-zinc-400 mb-1">Tên bài hát</label>
                 <input type="text" value={project.title} onChange={e => handleChange(index, 'title', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />

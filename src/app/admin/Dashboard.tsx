@@ -47,21 +47,21 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
   return (
     <div className="min-h-screen bg-zinc-950 text-white pb-20">
       {/* Header */}
-      <div className="sticky top-0 z-50 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-tight">Admin Dashboard</h1>
-        <div className="flex gap-4">
-          <button onClick={handleReset} className="px-4 py-2 bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600/30 transition-colors">Khôi phục gốc</button>
-          <button onClick={handleSave} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors shadow-[0_0_15px_rgba(34,197,94,0.4)]">Lưu thay đổi</button>
-          <button onClick={onLogout} className="px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors">Đăng xuất</button>
+      <div className="sticky top-0 z-50 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800 px-4 md:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <h1 className="text-xl md:text-2xl font-bold tracking-tight">Admin Dashboard</h1>
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+          <button onClick={handleReset} className="px-3 md:px-4 py-2 text-sm md:text-base bg-red-600/20 text-red-500 rounded-lg hover:bg-red-600/30 transition-colors">Khôi phục gốc</button>
+          <button onClick={handleSave} className="px-3 md:px-4 py-2 text-sm md:text-base bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors shadow-[0_0_15px_rgba(34,197,94,0.4)]">Lưu thay đổi</button>
+          <button onClick={onLogout} className="px-3 md:px-4 py-2 text-sm md:text-base bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors">Đăng xuất</button>
         </div>
       </div>
 
-      <div className="container mx-auto px-6 mt-8 max-w-5xl space-y-8">
+      <div className="container mx-auto px-4 md:px-6 mt-8 max-w-5xl space-y-8">
         
         {/* Hero Section */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-4 md:p-6 rounded-xl">
           <h2 className="text-xl font-bold mb-4">Hero Section</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-zinc-400 mb-1">Tiêu đề chính</label>
               <input type="text" value={formData.hero.text} onChange={e => handleChange('hero', 'text', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
@@ -74,7 +74,7 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
         </motion.div>
 
         {/* About Section */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-4 md:p-6 rounded-xl">
           <h2 className="text-xl font-bold mb-4">About Section</h2>
           <div className="space-y-4">
             <div>
@@ -87,7 +87,7 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
                   const newParas = [...formData.about.paragraphs];
                   newParas[0] = e.target.value;
                   handleChange('about', 'paragraphs', newParas);
-                }} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white h-24" />
+                }} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white h-24 md:h-32" />
             </div>
           </div>
         </motion.div>
@@ -100,9 +100,9 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
         <GalleryAdmin data={formData.gallery} onChange={(newData) => handleSectionChange('gallery', newData)} />
 
         {/* Contact Section */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-4 md:p-6 rounded-xl">
           <h2 className="text-xl font-bold mb-4">Contact Section</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-zinc-400 mb-1">Tiêu đề liên hệ</label>
               <input type="text" value={formData.contact.title} onChange={e => handleChange('contact', 'title', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />

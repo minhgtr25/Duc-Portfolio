@@ -41,7 +41,7 @@ export function GalleryAdmin({ data, onChange }: { data: any[], onChange: (newDa
         </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.map((image, index) => (
           <div key={image.id} className="p-4 border border-zinc-800 rounded-lg space-y-3 relative group">
             <button 

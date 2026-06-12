@@ -86,7 +86,7 @@ export function DemosAdmin({ data, onChange }: { data: any[], onChange: (newData
                 <label className="block text-sm text-zinc-400 mb-1">Tên Demo</label>
                 <input type="text" value={demo.title} onChange={e => handleChange(index, 'title', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-zinc-400 mb-1">Link Audio (audioSrc)</label>
                   <div className="flex gap-2">

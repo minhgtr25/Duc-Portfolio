@@ -76,7 +76,7 @@ export function ExperienceAdmin({ data, onChange }: { data: any[], onChange: (ne
             </button>
             <h3 className="font-semibold text-zinc-300 pr-10">Kinh nghiệm {index + 1}</h3>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-zinc-400 mb-1">Thời gian</label>
                 <input type="text" value={exp.year} onChange={e => handleChange(index, 'year', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
