@@ -1,8 +1,13 @@
-import { motion } from 'motion/react';
-import { Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Plus, Trash2, GripVertical, ChevronDown, ChevronUp } from 'lucide-react';
 import { SupabaseUpload } from '../components/SupabaseUpload';
 
 export function DemosAdmin({ data, onChange }: { data: any[], onChange: (newData: any[]) => void }) {
+  const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragEnabledIndex, setDragEnabledIndex] = useState<number | null>(null);
+
   const handleAddDemo = () => {
     const newId = data.length > 0 ? Math.max(...data.map(d => d.id)) + 1 : 100;
     onChange([
@@ -18,6 +23,7 @@ export function DemosAdmin({ data, onChange }: { data: any[], onChange: (newData
         ]
       }
     ]);
+    setExpandedIds(prev => ({ ...prev, [newId]: true }));
   };
 
   const handleRemoveDemo = (index: number) => {
@@ -57,99 +63,214 @@ export function DemosAdmin({ data, onChange }: { data: any[], onChange: (newData
     onChange(newData);
   };
 
+  const toggleExpand = (id: number) => {
+    setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleDragStart = (e: React.DragEvent, index: number) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === index) return;
+
+    const newData = [...data];
+    const target = newData[draggedIndex];
+    newData.splice(draggedIndex, 1);
+    newData.splice(index, 0, target);
+
+    setDraggedIndex(index);
+    setDragEnabledIndex(index);
+    onChange(newData);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragEnabledIndex(null);
+  };
+
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl relative">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">Demos Section</h2>
+        <div className="flex flex-col gap-1">
+          <h2 className="text-xl font-bold">Demos Section</h2>
+          <p className="text-xs text-zinc-400">Giữ chuột vào biểu tượng 6 chấm (grip) để kéo thả thay đổi thứ tự hiển thị.</p>
+        </div>
         <button 
           onClick={handleAddDemo}
-          className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-md text-sm transition-colors"
+          className="flex items-center gap-2 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 active:scale-[0.98] rounded-md text-sm transition-all shrink-0 cursor-pointer"
         >
           <Plus className="w-4 h-4" /> Thêm Demo
         </button>
       </div>
 
-      <div className="space-y-6">
-        {data.map((demo, index) => (
-          <div key={demo.id} className="p-4 border border-zinc-800 rounded-lg space-y-4 relative group">
-            <button 
-              onClick={() => handleRemoveDemo(index)}
-              className="absolute top-4 right-4 text-zinc-500 hover:text-red-500 transition-colors"
-              title="Xoá Demo này"
+      <div className="space-y-3">
+        {data.map((demo, index) => {
+          const isExpanded = !!expandedIds[demo.id];
+          const isDragging = draggedIndex === index;
+          
+          const summaryText = demo.info && demo.info.length > 0 
+            ? demo.info.map((inf: any) => `${inf.label}: ${inf.value}`).join(' • ')
+            : "Chưa có thông tin phụ";
+
+          return (
+            <motion.div 
+              key={demo.id}
+              layout
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              draggable={dragEnabledIndex === index}
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragEnd={handleDragEnd}
+              className={`border rounded-lg transition-colors overflow-hidden ${
+                isDragging 
+                  ? 'border-green-500 bg-zinc-800/80 opacity-50' 
+                  : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+              }`}
             >
-              <Trash2 className="w-5 h-5" />
-            </button>
-            <h3 className="font-semibold text-zinc-300 pr-10">Demo: {demo.title}</h3>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-zinc-400 mb-1">Tên Demo</label>
-                <input type="text" value={demo.title} onChange={e => handleChange(index, 'title', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
+              {/* Header card */}
+              <div 
+                className="flex items-center justify-between p-4 cursor-pointer select-none gap-3"
+                onClick={() => toggleExpand(demo.id)}
+              >
+                <div className="flex items-center gap-3 flex-1 min-w-0" onClick={e => e.stopPropagation()}>
+                  {/* Grip Handle */}
+                  <div
+                    onMouseDown={() => setDragEnabledIndex(index)}
+                    onMouseLeave={() => setDragEnabledIndex(null)}
+                    onMouseUp={() => setDragEnabledIndex(null)}
+                    className="p-1 cursor-grab active:cursor-grabbing hover:bg-zinc-800 rounded text-zinc-500 hover:text-zinc-300 transition-colors shrink-0"
+                    title="Giữ và kéo để đổi thứ tự"
+                  >
+                    <GripVertical className="w-5 h-5" />
+                  </div>
+                  
+                  {/* Number order */}
+                  <span className="text-sm font-mono text-zinc-500 shrink-0 font-bold">
+                    #{index + 1}
+                  </span>
+                  
+                  {/* Summary info */}
+                  <div 
+                    className="flex-1 min-w-0 cursor-pointer"
+                    onClick={() => toggleExpand(demo.id)}
+                  >
+                    <h3 className="font-semibold text-zinc-200 truncate">
+                      {demo.title || "Tên Demo mới"}
+                    </h3>
+                    <p className="text-xs text-zinc-400 truncate">
+                      {summaryText}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 shrink-0" onClick={e => e.stopPropagation()}>
+                  <button 
+                    onClick={() => handleRemoveDemo(index)}
+                    className="p-2 text-zinc-500 hover:text-red-500 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer"
+                    title="Xoá Demo này"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                  <button 
+                    onClick={() => toggleExpand(demo.id)}
+                    className="p-2 text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 rounded-md transition-colors cursor-pointer"
+                  >
+                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm text-zinc-400 mb-1">Link Audio (audioSrc)</label>
-                  <div className="flex gap-2">
-                    <input type="text" value={demo.audioSrc} onChange={e => handleChange(index, 'audioSrc', e.target.value)} className="flex-1 bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
-                    <div className="w-32">
-                      <SupabaseUpload 
-                        folder="audio" 
-                        accept="audio/*" 
-                        label="Upload Nhạc" 
-                        onUploadSuccess={(url) => handleChange(index, 'audioSrc', url)} 
-                      />
+
+              {/* Collapsible Form */}
+              <AnimatePresence initial={false}>
+                {isExpanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="border-t border-zinc-800/80"
+                  >
+                    <div className="p-4 bg-zinc-900/30 space-y-4">
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm text-zinc-400 mb-1">Tên Demo</label>
+                          <input type="text" value={demo.title} onChange={e => handleChange(index, 'title', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white text-zinc-100" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm text-zinc-400 mb-1">Link Audio (audioSrc)</label>
+                            <div className="flex gap-2">
+                              <input type="text" value={demo.audioSrc} onChange={e => handleChange(index, 'audioSrc', e.target.value)} className="flex-1 bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white text-zinc-100" />
+                              <div className="w-32">
+                                <SupabaseUpload 
+                                  folder="audio" 
+                                  accept="audio/*" 
+                                  label="Upload Nhạc" 
+                                  onUploadSuccess={(url) => handleChange(index, 'audioSrc', url)} 
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-sm text-zinc-400 mb-1">Link Video / Mở Rộng</label>
+                            <input type="text" value={demo.linkDemo} onChange={e => handleChange(index, 'linkDemo', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white text-zinc-100" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Info Array */}
+                      <div className="pt-4 border-t border-zinc-800/50">
+                        <div className="flex justify-between items-center mb-2">
+                          <label className="block text-sm font-medium text-zinc-300">Các thông tin phụ (Thể loại, vai trò,...):</label>
+                          <button 
+                            type="button"
+                            onClick={() => handleAddInfo(index)}
+                            className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300 transition-colors cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Thêm thông tin
+                          </button>
+                        </div>
+                        <div className="space-y-2">
+                          {demo.info.map((infoItem: any, infoIndex: number) => (
+                            <div key={infoIndex} className="flex gap-2 items-center">
+                              <input 
+                                type="text" 
+                                value={infoItem.label} 
+                                onChange={e => handleInfoChange(index, infoIndex, 'label', e.target.value)} 
+                                placeholder="Nhãn (VD: Thể loại)"
+                                className="w-1/3 bg-zinc-800/50 px-3 py-1.5 text-sm rounded border border-transparent focus:border-zinc-700 focus:outline-none focus:bg-zinc-800 text-zinc-100" 
+                              />
+                              <input 
+                                type="text" 
+                                value={infoItem.value} 
+                                onChange={e => handleInfoChange(index, infoIndex, 'value', e.target.value)} 
+                                placeholder="Giá trị (VD: Pop Ballad)"
+                                className="w-full bg-zinc-800/50 px-3 py-1.5 text-sm rounded border border-transparent focus:border-zinc-700 focus:outline-none focus:bg-zinc-800 text-zinc-100" 
+                              />
+                              <button 
+                                type="button"
+                                onClick={() => handleRemoveInfo(index, infoIndex)}
+                                className="text-zinc-600 hover:text-red-500 p-1 transition-colors cursor-pointer"
+                                title="Xoá thông tin"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
                     </div>
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm text-zinc-400 mb-1">Link Video / Mở Rộng</label>
-                  <input type="text" value={demo.linkDemo} onChange={e => handleChange(index, 'linkDemo', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
-                </div>
-              </div>
-            </div>
-
-            {/* Info Array */}
-            <div className="pt-4 border-t border-zinc-800/50">
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-zinc-300">Các thông tin phụ (Thể loại, vai trò,...):</label>
-                <button 
-                  onClick={() => handleAddInfo(index)}
-                  className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300 transition-colors"
-                >
-                  <Plus className="w-3 h-3" /> Thêm thông tin
-                </button>
-              </div>
-              <div className="space-y-2">
-                {demo.info.map((infoItem: any, infoIndex: number) => (
-                  <div key={infoIndex} className="flex gap-2 items-center">
-                    <input 
-                      type="text" 
-                      value={infoItem.label} 
-                      onChange={e => handleInfoChange(index, infoIndex, 'label', e.target.value)} 
-                      placeholder="Nhãn (VD: Thể loại)"
-                      className="w-1/3 bg-zinc-800/50 px-3 py-1.5 text-sm rounded border border-transparent focus:border-zinc-700 focus:outline-none focus:bg-zinc-800" 
-                    />
-                    <input 
-                      type="text" 
-                      value={infoItem.value} 
-                      onChange={e => handleInfoChange(index, infoIndex, 'value', e.target.value)} 
-                      placeholder="Giá trị (VD: Pop Ballad)"
-                      className="w-full bg-zinc-800/50 px-3 py-1.5 text-sm rounded border border-transparent focus:border-zinc-700 focus:outline-none focus:bg-zinc-800" 
-                    />
-                    <button 
-                      onClick={() => handleRemoveInfo(index, infoIndex)}
-                      className="text-zinc-600 hover:text-red-500 p-1 transition-colors"
-                      title="Xoá thông tin"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
         {data.length === 0 && (
           <div className="text-center text-zinc-500 py-8 border border-dashed border-zinc-800 rounded-lg">
             Chưa có Demo nào. Hãy thêm mới!
