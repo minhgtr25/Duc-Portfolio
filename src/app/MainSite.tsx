@@ -10,8 +10,25 @@ import { PlayerProvider } from './context/PlayerContext';
 import { MusicPlayer } from './components/MusicPlayer';
 import { SmoothScroll } from './components/SmoothScroll';
 import { CustomCursor } from './components/CustomCursor';
+import { useData } from './context/DataContext';
 
 export function MainSite() {
+  const { isLoading } = useData();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[100dvh] bg-black text-white flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="relative w-12 h-12 mx-auto">
+            <div className="absolute inset-0 border border-zinc-800 rounded-full"></div>
+            <div className="absolute inset-0 border border-t-white rounded-full animate-spin"></div>
+          </div>
+          <p className="text-zinc-500 font-mono tracking-widest text-xs uppercase animate-pulse">Loading Portfolio</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <PlayerProvider>
       <SmoothScroll>
@@ -21,6 +38,7 @@ export function MainSite() {
           <About />
           <Projects />
           <Demos />
+
           <Services />
           <Experience />
           <Gallery />

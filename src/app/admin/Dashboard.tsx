@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import { motion } from 'motion/react';
 import { defaultData } from '../data/defaultData';
@@ -9,8 +9,15 @@ import { ServicesAdmin } from './sections/ServicesAdmin';
 import { GalleryAdmin } from './sections/GalleryAdmin';
 
 export function Dashboard({ onLogout }: { onLogout: () => void }) {
-  const { data, updateData } = useData();
+  const { data, updateData, isLoading } = useData();
   const [formData, setFormData] = useState(data);
+
+  // Sync formData with actual data loaded from Supabase/LocalStorage
+  useEffect(() => {
+    if (!isLoading && data) {
+      setFormData(data);
+    }
+  }, [data, isLoading]);
 
   const handleSave = async () => {
     try {
@@ -25,7 +32,7 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
     if(confirm('Bạn có chắc chắn muốn khôi phục dữ liệu gốc không?')) {
       setFormData(defaultData);
     }
-  }
+  };
 
   const handleChange = (section: keyof typeof formData, field: string, value: any) => {
     setFormData((prev: any) => ({
@@ -43,6 +50,18 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
       [section]: value
     }));
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-10 h-10 border-4 border-zinc-800 border-t-emerald-500 rounded-full animate-spin mx-auto" />
+          <p className="text-sm text-zinc-400">Đang tải dữ liệu từ cơ sở dữ liệu...</p>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white pb-20">
