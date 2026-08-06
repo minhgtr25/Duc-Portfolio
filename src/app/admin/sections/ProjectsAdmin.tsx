@@ -17,7 +17,8 @@ export function ProjectsAdmin({ data, onChange }: { data: any[], onChange: (newD
         audioSrc: "",
         spotifyUrl: "",
         youtubeUrl: "",
-        facebookUrl: ""
+        facebookUrl: "",
+        role: "Producer"
       }
     ]);
   };
@@ -119,9 +120,13 @@ export function ProjectsAdmin({ data, onChange }: { data: any[], onChange: (newD
                 <label className="block text-sm text-zinc-400 mb-1">YouTube URL</label>
                 <input type="text" value={project.youtubeUrl || ''} onChange={e => handleChange(index, 'youtubeUrl', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
               </div>
-              <div className="col-span-2">
+              <div>
                 <label className="block text-sm text-zinc-400 mb-1">Facebook URL</label>
                 <input type="text" value={project.facebookUrl || ''} onChange={e => handleChange(index, 'facebookUrl', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" />
+              </div>
+              <div>
+                <label className="block text-sm text-zinc-400 mb-1">Vai trò của bạn (VD: Producer, Beat Maker)</label>
+                <input type="text" value={project.role || ''} onChange={e => handleChange(index, 'role', e.target.value)} className="w-full bg-zinc-800 px-4 py-2 rounded-lg border border-zinc-700 focus:outline-none focus:border-white" placeholder="Ví dụ: Producer, Beat Maker, String Engineer" />
               </div>
             </div>
           </div>

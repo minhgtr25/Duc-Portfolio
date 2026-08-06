@@ -28,6 +28,7 @@ export const defaultData = {
       audioSrc: "/audio/Ôm Em Khóc Thật To.mp3",
       spotifyUrl: "https://open.spotify.com/track/5fvT9fn2GGn9q5KAaFo6Rc",
       youtubeUrl: "https://www.youtube.com/watch?v=ctFQZ1FDgck&list=RDctFQZ1FDgck&start_radio=1&pp=ygUWw7RtIGVtIGtow7NjIHRo4bqtdCB0b6AHAQ%3D%3D",
+      role: "Music Arranger",
     },
     {
       id: 2,
@@ -39,6 +40,7 @@ export const defaultData = {
       audioSrc: "/audio/Vì đồng bào, cùng chung tay.mp3",
       spotifyUrl: "https://open.spotify.com/track/6wlA6c1zEwRnE3ejjNTB8T",
       youtubeUrl: "https://www.youtube.com/watch?v=ioUTsS8mBl0&list=RDioUTsS8mBl0&start_radio=1&pp=ygUgdsOsIMSR4buTbmcgYsOgbyBjw7luZyBjaHVuZyB0YXmgBwE%3D",
+      role: "Music Arranger",
     },
     {
       id: 3,
@@ -49,6 +51,7 @@ export const defaultData = {
       image: "/img/soica.jpg",
       audioSrc: "/audio/Sói ca.mp3",
       youtubeUrl: "https://www.youtube.com/watch?v=M_u27ppUKyM&list=RDM_u27ppUKyM&start_radio=1&pp=ygUPc8OzaSBjYSBicmF3bGVyoAcB",
+      role: "Beat Maker & Arranger",
     },
     {
       id: 4,
@@ -60,6 +63,7 @@ export const defaultData = {
       audioSrc: "/audio/Black Mirror.mp3",
       facebookUrl: "https://www.facebook.com/reel/1109246727256893",
       youtubeUrl: "",
+      role: "Guitarist & Producer",
     },
     {
       id: 5,
@@ -71,6 +75,7 @@ export const defaultData = {
       audioSrc: "/audio/Lời Mật Ngọt.mp3",
       spotifyUrl: "https://open.spotify.com/track/4GrKze4WF3GkCpXzwQPlgt?si=58cf38044fca4cc9&nd=1&dlsi=cf4b572873aa44c2",
       youtubeUrl: "https://youtu.be/ShshtjcIv-o?si=RgmwLYQt8VkuzaCa",
+      role: "Music Arranger",
     },
     {
       id: 6,
@@ -82,6 +87,7 @@ export const defaultData = {
       audioSrc: "/audio/Tại Sao Như Này.mp3",
       spotifyUrl: "https://open.spotify.com/track/1FTusNRky7oO17Ca4Sv5Ez",
       youtubeUrl: "https://youtu.be/rErjIeXC27M?si=AgDAGeWcGwp20-3e",
+      role: "Guitarist",
     },
   ],
   demos: [

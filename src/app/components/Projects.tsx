@@ -112,43 +112,53 @@ export function Projects() {
                     <span className="hidden md:inline">• {project.year}</span>
                   </span>
                 </div>
-              </div>
 
-              {/* External Links (Spotify, Youtube) */}
-              <div className="flex items-center gap-2 md:gap-3 md:mt-4 md:w-full md:justify-start">
-                {project.spotifyUrl && (
-                  <a
-                    href={project.spotifyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-gray-400 hover:text-[#1DB954] transition-colors p-2 md:p-0"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <SpotifyIcon className="w-5 h-5 md:w-6 md:h-6" />
-                  </a>
-                )}
-                {project.youtubeUrl && (
-                  <a
-                    href={project.youtubeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-gray-400 hover:text-[#FF0000] transition-colors p-2 md:p-0"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <YoutubeIcon className="w-5 h-5 md:w-6 md:h-6" />
-                  </a>
-                )}
-                {(project as any).facebookUrl && (
-                  <a
-                    href={(project as any).facebookUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-gray-400 hover:text-[#1877F2] transition-colors p-2 md:p-0"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FacebookIcon className="w-5 h-5 md:w-6 md:h-6" />
-                  </a>
-                )}
+                {/* Role and Links Row */}
+                <div className="flex items-center gap-3 mt-2 md:mt-3 w-full">
+                  {project.role && (
+                    <span className="text-xs md:text-sm text-gray-400 shrink-0 font-normal">
+                      {project.role}
+                    </span>
+                  )}
+                  {project.role && (project.spotifyUrl || project.youtubeUrl || (project as any).facebookUrl) && (
+                    <span className="text-zinc-700 text-xs select-none">|</span>
+                  )}
+                  <div className="flex items-center gap-2 md:gap-2.5">
+                    {project.spotifyUrl && (
+                      <a
+                        href={project.spotifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-gray-400 hover:text-[#1DB954] transition-colors p-1 md:p-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <SpotifyIcon className="w-4 h-4 md:w-5 h-5" />
+                      </a>
+                    )}
+                    {project.youtubeUrl && (
+                      <a
+                        href={project.youtubeUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-gray-400 hover:text-[#FF0000] transition-colors p-1 md:p-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <YoutubeIcon className="w-4 h-4 md:w-5 h-5" />
+                      </a>
+                    )}
+                    {(project as any).facebookUrl && (
+                      <a
+                        href={(project as any).facebookUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-gray-400 hover:text-[#1877F2] transition-colors p-1 md:p-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FacebookIcon className="w-4 h-4 md:w-5 h-5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
