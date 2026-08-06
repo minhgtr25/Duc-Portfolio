@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Loader2, UploadCloud } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface SupabaseUploadProps {
   onUploadSuccess: (url: string) => void;
@@ -18,12 +19,13 @@ export function SupabaseUpload({ onUploadSuccess, folder = 'uploads', accept = '
 
     // Check if Supabase keys are configured
     if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-      alert("Vui lòng cấu hình VITE_SUPABASE_URL và VITE_SUPABASE_ANON_KEY trong file .env trước khi upload file!");
+      toast.error("Vui lòng cấu hình VITE_SUPABASE_URL và VITE_SUPABASE_ANON_KEY trong file .env trước khi upload file!");
       return;
     }
 
     try {
       setIsUploading(true);
+      toast.info('Đang bắt đầu tải file lên...');
       
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
@@ -41,9 +43,10 @@ export function SupabaseUpload({ onUploadSuccess, folder = 'uploads', accept = '
       const { data: { publicUrl } } = supabase.storage.from('media').getPublicUrl(filePath);
       
       onUploadSuccess(publicUrl);
+      toast.success('Tải file lên thành công!');
     } catch (error: any) {
       console.error('Error uploading file:', error);
-      alert('Lỗi upload file: ' + error.message);
+      toast.error('Lỗi upload file: ' + error.message);
     } finally {
       setIsUploading(false);
       // Reset input
